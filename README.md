@@ -114,4 +114,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 - This project is inspired by various online tutorials and the enthusiasm of the open-source community for AI and game development.
 
 
-## C++ version is in development
+## C++ version
+
+- Coming soon
