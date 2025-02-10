@@ -112,8 +112,6 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 - Special thanks to the developers and communities behind PyTorch and Pygame for providing robust tools to build and experiment with reinforcement learning.
 - This project is inspired by various online tutorials and the enthusiasm of the open-source community for AI and game development.
-```
 
----
 
-You can adjust the repository URL, file names, or any details as needed. This README provides an overview, installation instructions, and usage guidelines for both the Mac and Windows versions of your project, making it easy for others to understand and contribute.
+## C++ version is in development
