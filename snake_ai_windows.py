@@ -10,8 +10,13 @@ import torch.optim as optim
 import sys
 import time
 
-# 设备设置：在 Windows 上优先使用 CUDA，否则使用 CPU
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# 设备选择：在 Mac 上如果 MPS 可用则使用 MPS，否则优先使用 CUDA，再使用 CPU
+if torch.backends.mps.is_available():
+    device = torch.device("mps")
+elif torch.cuda.is_available():
+    device = torch.device("cuda")
+else:
+    device = torch.device("cpu")
 print("Using device:", device)
 
 # 定义方向枚举类
@@ -65,7 +70,7 @@ class SnakeGameAI:
         self.frame_iteration += 1
 
         if self.render:
-            # 处理 pygame 事件（防止窗口无响应）
+            # 处理 pygame 事件，防止窗口无响应
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.quit()
@@ -280,7 +285,7 @@ class Agent:
         self.trainer.train_step(state, action, reward, next_state, done)
 
     def get_action(self, state):
-        # 随着游戏局数增加逐渐降低探索率
+        # 每次调用时根据 n_games 计算 epsilon
         self.epsilon = 80 - self.n_games
         final_move = [0, 0, 0]
         if random.randint(0, 200) < self.epsilon:
@@ -321,7 +326,7 @@ def train():
                 # 当达到新纪录时保存模型
                 agent.model.save()
 
-            # 每50局自动保存训练的模型
+            # 每50局自动保存一次模型
             if agent.n_games % 50 == 0:
                 agent.model.save(f"model_{agent.n_games}.pth")
 
@@ -333,11 +338,11 @@ def train():
 def demo():
     game = SnakeGameAI(render=True)
     agent = Agent()
-    # 加载训练好的模型，注意 map_location 参数确保在当前设备上加载
+    # 加载训练好的模型，确保在当前设备上加载
     agent.model.load_state_dict(torch.load("model.pth", map_location=device))
     agent.model.eval()
-    # 禁用随机探索
-    agent.epsilon = 0
+    # 通过设置 n_games = 80，保证 epsilon = 80 - 80 = 0，从而禁用随机探索
+    agent.n_games = 80
     while True:
         state_old = agent.get_state(game)
         final_move = agent.get_action(state_old)
