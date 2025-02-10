@@ -3,14 +3,10 @@
 This repository contains two versions of a Snake game AI that uses Deep Q-Networks (DQN) to learn how to play the classic Snake game through reinforcement learning. Both versions support GPU acceleration on their respective platforms:
 
 - **Mac Version (Apple Silicon with MPS support)**  
-  Uses Apple's Metal Performance Shaders (MPS) to accelerate training if available. This version is split into multiple files:
-  - `snake_ai_core.py`: Contains the core game environment, neural network, training agent, and utilities.
-  - `train_snake_ai.py`: Runs training in headless mode (no game window) for faster performance while visualizing score progress using Matplotlib.
-  - `demo_snake_ai.py`: Loads a saved model and visually demonstrates the AI playing Snake in a Pygame window.
+  Uses Apple's Metal Performance Shaders (MPS) to accelerate training if available. 
 
 - **Windows Version (CUDA/CPU fallback)**  
-  Designed for Windows environments. This version will attempt to use CUDA for GPU acceleration if available; otherwise, it falls back to CPU. The complete implementation is provided in:
-  - `snake_ai_windows.py`: A single-file script that supports both training (headless mode) and demo mode (graphical display) based on command-line arguments.
+  Designed for Windows environments. This version will attempt to use CUDA for GPU acceleration if available; otherwise, it falls back to CPU. 
 
 ## Features
 
@@ -43,46 +39,20 @@ pip install torch torchvision torchaudio pygame numpy matplotlib
 
 - **Mac Version (Apple Silicon):**  
   - Ensure you have the latest PyTorch version that supports MPS.
-  - The Mac version is split into three files: `snake_ai_core.py`, `train_snake_ai.py`, and `demo_snake_ai.py`.
 
 - **Windows Version:**  
   - The script `snake_ai_windows.py` will attempt to use CUDA for GPU acceleration. If CUDA is unavailable, it will automatically fall back to using the CPU.
 
 ## Usage
 
-### Mac Version
-
-#### Training Mode
-
-Run the training script in headless mode (no game window):
-
-```bash
-python train_snake_ai.py
-```
-
-- The training process will run without displaying the game window.
-- Scores are visualized in real-time using Matplotlib.
-- The model is automatically saved (as `model.pth`) when a new high score is achieved.
-
-#### Demo Mode
-
-After training, you can watch the AI play by running:
-
-```bash
-python demo_snake_ai.py
-```
-
-- A Pygame window will open, showing the AI playing the game.
-- Ensure that `model.pth` exists in your working directory.
-
-### Windows Version
+### Mac & Windows Version
 
 #### Training Mode
 
 Run the Windows script in training mode (headless):
 
 ```bash
-python snake_ai_windows.py
+python snake_ai.py
 ```
 
 - The game runs in headless mode to speed up training.
@@ -94,7 +64,7 @@ python snake_ai_windows.py
 To load the trained model and visualize the AI playing the game, run:
 
 ```bash
-python snake_ai_windows.py demo
+python snake_ai.py demo
 ```
 
 - A Pygame window will open to display the AI in action.
