@@ -33,8 +33,8 @@ This repository contains two versions of a Snake game AI that uses Deep Q-Networ
 Clone this repository and install the required dependencies:
 
 ```bash
-git clone https://github.com/yourusername/snake-ai.git
-cd snake-ai
+git clone https://github.com/kl-charizard/snake-ai-python
+cd snake-ai-python
 pip install torch torchvision torchaudio pygame numpy matplotlib
 ```
 
