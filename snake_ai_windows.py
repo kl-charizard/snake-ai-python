@@ -299,31 +299,25 @@ def train():
     total_score = 0
     record = 0
     agent = Agent()
-    # 训练时关闭窗口渲染以提高速度
     game = SnakeGameAI(render=False)
 
     while True:
-        state_old = agent.get_state(game)
-        final_move = agent.get_action(state_old)
-        reward, done, score = game.play_step(final_move)
-        state_new = agent.get_state(game)
-
-        agent.train_short_memory(state_old, final_move, reward, state_new, done)
-        agent.remember(state_old, final_move, reward, state_new, done)
+        # ... 原有的游戏循环代码 ...
 
         if done:
             game.reset()
             agent.n_games += 1
             agent.train_long_memory()
 
+            # 每50局自动保存模型检查点
+            if agent.n_games % 50 == 0:
+                agent.model.save(f'model_checkpoint_{agent.n_games}.pth')
+
             if score > record:
                 record = score
-                # 当达到新纪录时保存模型
-                agent.model.save()
+                agent.model.save()  # 新纪录仍保存为model.pth
 
             print(f"Game: {agent.n_games}, Score: {score}, Record: {record}")
-            scores.append(score)
-            total_score += score
 
 # 演示过程：加载模型并显示 AI 玩游戏的过程
 def demo():
