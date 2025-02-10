@@ -36,3 +36,84 @@ Clone this repository and install the required dependencies:
 git clone https://github.com/yourusername/snake-ai.git
 cd snake-ai
 pip install torch torchvision torchaudio pygame numpy matplotlib
+```
+
+
+## Platform-Specific Notes
+
+- **Mac Version (Apple Silicon):**  
+  - Ensure you have the latest PyTorch version that supports MPS.
+  - The Mac version is split into three files: `snake_ai_core.py`, `train_snake_ai.py`, and `demo_snake_ai.py`.
+
+- **Windows Version:**  
+  - The script `snake_ai_windows.py` will attempt to use CUDA for GPU acceleration. If CUDA is unavailable, it will automatically fall back to using the CPU.
+
+## Usage
+
+### Mac Version
+
+#### Training Mode
+
+Run the training script in headless mode (no game window):
+
+```bash
+python train_snake_ai.py
+```
+
+- The training process will run without displaying the game window.
+- Scores are visualized in real-time using Matplotlib.
+- The model is automatically saved (as `model.pth`) when a new high score is achieved.
+
+#### Demo Mode
+
+After training, you can watch the AI play by running:
+
+```bash
+python demo_snake_ai.py
+```
+
+- A Pygame window will open, showing the AI playing the game.
+- Ensure that `model.pth` exists in your working directory.
+
+### Windows Version
+
+#### Training Mode
+
+Run the Windows script in training mode (headless):
+
+```bash
+python snake_ai_windows.py
+```
+
+- The game runs in headless mode to speed up training.
+- Training progress (game count, current score, record score) is displayed in the console.
+- The model is saved to `model.pth` when new records are reached.
+
+#### Demo Mode
+
+To load the trained model and visualize the AI playing the game, run:
+
+```bash
+python snake_ai_windows.py demo
+```
+
+- A Pygame window will open to display the AI in action.
+- Make sure the `model.pth` file is available in the working directory.
+
+## Contributing
+
+Contributions, suggestions, and improvements are welcome! Please open an issue or submit a pull request on GitHub.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Special thanks to the developers and communities behind PyTorch and Pygame for providing robust tools to build and experiment with reinforcement learning.
+- This project is inspired by various online tutorials and the enthusiasm of the open-source community for AI and game development.
+```
+
+---
+
+You can adjust the repository URL, file names, or any details as needed. This README provides an overview, installation instructions, and usage guidelines for both the Mac and Windows versions of your project, making it easy for others to understand and contribute.
