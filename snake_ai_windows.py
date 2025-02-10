@@ -336,6 +336,8 @@ def demo():
     # 加载训练好的模型，注意 map_location 参数确保在当前设备上加载
     agent.model.load_state_dict(torch.load("model.pth", map_location=device))
     agent.model.eval()
+    # 禁用随机探索
+    agent.epsilon = 0
     while True:
         state_old = agent.get_state(game)
         final_move = agent.get_action(state_old)
